@@ -39,7 +39,7 @@ void handleErrors()
 }
 
 int encryptKey(unsigned char *in, int inl, unsigned char *key,
-			unsigned char *iv, unsigned char *out, const EVP_CIPHER *cipher, int enc)
+			   unsigned char *iv, unsigned char *out, const EVP_CIPHER *cipher, int enc)
 {
 	EVP_CIPHER_CTX *ctx;
 	int len, outl;
@@ -92,7 +92,7 @@ void Keystore::cipher(FILE *ifp, FILE *ofp, int enc)
 	}
 
 	EVP_CIPHER_CTX *ctx;
-	
+
 	if(enc == 1)
 	{
 		randomBits(iv, ivl);

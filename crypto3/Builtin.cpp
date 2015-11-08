@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const unsigned char *const key = (unsigned char *)"super secret builtin key";
+const unsigned char *const key = (unsigned char *)"Super secret builtin key there!";
 
 void randomBits(unsigned char key[], size_t len)
 {
@@ -27,18 +27,18 @@ void handleErrors()
 
 void builtinEncrypt(const unsigned char *message, int messageSize, FILE *config)
 {
-  unsigned char *out = new unsigned char[messageSize + 16], iv[16];
+	unsigned char *out = new unsigned char[messageSize + 16], iv[16];
 	int outl;
 
 	EVP_CIPHER_CTX *ctx;
-	
+
 	randomBits(iv, 16);
 	if(fwrite(iv, 16, 1, config) != 1)
 	{
 		fputs("write error\n", stderr);
 		exit(1);
 	}
-	
+
 	ERR_load_crypto_strings();
 	OpenSSL_add_all_algorithms();
 	OPENSSL_config(NULL);
@@ -56,21 +56,21 @@ void builtinEncrypt(const unsigned char *message, int messageSize, FILE *config)
 	fwrite(out, 1, outl, config);
 
 	EVP_CIPHER_CTX_free(ctx);
-	
+
 	EVP_cleanup();
 	ERR_free_strings();
-	
+
 	delete[] out;
 }
 
 string builtinDecrypt(FILE *config)
 {
-  string result;
+	string result;
 	unsigned char in[4096], out[4112], iv[16];
 	int inl, outl;
 
 	EVP_CIPHER_CTX *ctx;
-	
+
 	if(fread(iv, 16, 1, config) != 1)
 	{
 		fputs("read error\n", stderr);
@@ -95,9 +95,9 @@ string builtinDecrypt(FILE *config)
 	result.append((const char *)out, outl);
 
 	EVP_CIPHER_CTX_free(ctx);
-	
+
 	EVP_cleanup();
 	ERR_free_strings();
-  
-  return result;
+
+	return result;
 }

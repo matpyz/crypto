@@ -1,16 +1,11 @@
 // Copyright (c) 2015 Mateusz Pyzik, all rights reserved.
 #include "Keystore.hpp"
-#include <iostream>
+#include "Echo.hpp"
 #include <string.h>
+#include <openssl/evp.h>
+#include <iostream>
 
 using namespace std;
-
-#include <openssl/evp.h>
-
-void echo(bool flag)
-{
-	// should enable/disable echoing in terminal
-}
 
 int main(int argc, char *argv[])
 {
@@ -31,9 +26,9 @@ int main(int argc, char *argv[])
 		Keystore keystore(argv[3], argv[2]);
 		const char *keyIdentifier = argv[4];
 		string password;
-		echo(false);
+		setEcho(false);
 		getline(cin, password);
-		echo(true);
+		setEcho(true);
 		keystore.createKey(keyIdentifier, password);
 	}
 	else if(action == "enc" || (enc = 0, action == "dec"))
