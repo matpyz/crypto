@@ -1,6 +1,7 @@
 // Copyright (c) 2015 Mateusz Pyzik, all rights reserved.
 #include "Keystore.hpp"
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 

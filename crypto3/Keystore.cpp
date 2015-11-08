@@ -13,7 +13,9 @@ using namespace std;
 void randomBits(unsigned char key[], size_t len)
 {
 	random_device dev;
-	mt19937 mt(seed_seq({dev(), dev(), dev(), dev()}));
+	seed_seq seq({dev(), dev(), dev(), dev()});
+	mt19937 mt;
+	mt.seed(seq);
 	len /= sizeof(unsigned);
 	for(size_t i = 0; i < len; ++i)
 		((unsigned *)key)[i] = mt();
@@ -21,7 +23,9 @@ void randomBits(unsigned char key[], size_t len)
 
 void userKeyFromPassword(const string &password, unsigned char userKey[32], unsigned char userIv[16])
 {
-	mt19937 mt(seed_seq(password.begin(), password.end()));
+	seed_seq seq(password.begin(), password.end());
+	mt19937 mt;
+	mt.seed(seq);
 	for(size_t i = 0; i < 8; ++i)
 		((unsigned *)userKey)[i] = mt();
 	for(size_t i = 0; i < 4; ++i)
