@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
 		const char *keyIdentifier = argv[5];
 		const char *inputFile = argv[6], *outputFile = argv[7];
 		string password;
-		echo(false);
+		setEcho(false);
 		getline(cin, password);
-		echo(true);
+		setEcho(true);
 		keystore.setMode(argv[3]);
 		keystore.loadKey(keyIdentifier, password);
 		FILE *ifp = stdin, *ofp = stdout;
